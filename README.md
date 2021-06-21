@@ -23,5 +23,6 @@ Optional steps to enable GPU acceleration for training:
   - `JUPYTER_PORT`: Override default port (8888)
   - `NETRON_PORT`: Override default port (8081)
   - `JUPYTER_PASSWD_HASH`: Override default password ("radioml")
-- Run `./run_docker.sh` inside `sandbox/` to launch the Jupyter notebook server
+- **Run `./run_docker.sh` inside `sandbox/` to launch the Jupyter notebook server**
+- **Connect to `http://HOSTNAME:JUPYTER_PORT` from a browser and login with password "radioml"**
 - Alternatively (for experimentation): Run `./run_docker.sh bash` to launch an interactive shell
