@@ -1,17 +1,20 @@
 #!/bin/bash
 
-RED='\033[0;31m'
 GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
-
 # green echo
 gecho () {
   echo -e "${GREEN}$1${NC}"
 }
-
 # red echo
 recho () {
   echo -e "${RED}$1${NC}"
+}
+# yellow echo
+yecho () {
+  echo -e "${YELLOW}$1${NC}"
 }
 
 DOCKER_GID=$(id -g)
@@ -35,7 +38,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 # the settings below will be taken from environment variables if available,
 # otherwise the defaults below will be used
 : ${JUPYTER_PORT=8888}
-: ${JUPYTER_PASSWD_HASH="sha1:a8165c509d95:e3d55958f35e77b8565d0c38a7cca31d7a0e2c3b"} # "radioml"
+: ${JUPYTER_PASSWD_HASH=sha1:a8165c509d95:e3d55958f35e77b8565d0c38a7cca31d7a0e2c3b} # "radioml"
 : ${NETRON_PORT=8081}
 : ${LOCALHOST_URL="localhost"}
 : ${DATASET_PATH=""}
@@ -62,13 +65,9 @@ else
   DOCKER_EXTRA+="-p $NETRON_PORT:$NETRON_PORT "
 fi
 
-gecho "Docker container is named $DOCKER_INST_NAME"
-
-gecho "Port-forwarding for Jupyter $JUPYTER_PORT:$JUPYTER_PORT"
-gecho "Port-forwarding for Netron $NETRON_PORT:$NETRON_PORT"
-
 # Build the sandbox Docker image
 # Need to ensure this is done within the root folder:
+gecho "Building Docker image.."
 OLD_PWD=$(pwd)
 cd $SCRIPTPATH
 docker build -f Dockerfile --tag=$DOCKER_TAG \
@@ -84,16 +83,27 @@ cd $OLD_PWD
 DOCKER_EXEC="docker run -t --rm $DOCKER_INTERACTIVE --init "
 DOCKER_EXEC+="--hostname $DOCKER_INST_NAME "
 DOCKER_EXEC+="-e SHELL=/bin/bash "
-DOCKER_EXEC+="-v $SCRIPTPATH:/workspace/finn "
+DOCKER_EXEC+="-v $SCRIPTPATH:/workspace/sandbox "
 
-# expose selected GPUs
-if [[ "$DOCKER_GPUS" != "" ]]; then
-  DOCKER_EXEC+="--gpus $DOCKER_GPUS "
-fi
+gecho "Docker container is named $DOCKER_INST_NAME"
+gecho "Port-forwarding for Jupyter $JUPYTER_PORT:$JUPYTER_PORT"
+gecho "Port-forwarding for Netron $NETRON_PORT:$NETRON_PORT"
+gecho "Mounting $SCRIPTPATH at /workspace/sandbox"
 
 # mount dataset
 if [[ "$DATASET_PATH" != "" ]]; then
   DOCKER_EXEC+="-v $DATASET_PATH:/workspace/dataset "
+  gecho "Mounting $DATASET_PATH at /workspace/dataset"
+else
+  yecho "Not set: DATASET_PATH to mount"
+fi
+
+# expose selected GPUs
+if [[ "$DOCKER_GPUS" != "" ]]; then
+  DOCKER_EXEC+="--gpus $DOCKER_GPUS "
+  gecho "Exposing GPU(s): $DOCKER_GPUS"
+else
+  yecho "Not set: DOCKER_GPUS to expose"
 fi
 
 DOCKER_EXEC+="-e LOCALHOST_URL=$LOCALHOST_URL "

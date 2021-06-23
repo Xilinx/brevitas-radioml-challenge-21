@@ -1,4 +1,7 @@
 FROM pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+
+# Alternative base images
+#FROM pytorch/pytorch:1.8.0-cuda11.1-cudnn8-runtime
 #FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-runtime
 
 LABEL maintainer="Yaman Umuroglu <yamanu@xilinx.com>"
@@ -38,16 +41,9 @@ RUN pip install scikit-learn==0.24.1
 RUN pip install tqdm==4.61.1
 RUN pip install dill==0.3.3
 RUN pip install -e git+https://github.com/fbcotter/dataset_loading.git@0.0.4#egg=dataset_loading
-
 RUN pip install brevitas==0.5.1
-#RUN pip install onnx==1.8.1
 RUN pip install onnxoptimizer==0.2.6
-
-#RUN pip install clize==4.1.1
-#RUN pip install onnxruntime==1.4.0
-#RUN pip install toposort>=1.5.0
 RUN pip install git+https://github.com/Xilinx/finn-base.git@feature/itu_competition_21#egg=finn-base[onnx]
-
 RUN pip install versioned-hdf5
 
 # switch user
@@ -60,6 +56,6 @@ RUN chown -R $UNAME:$GNAME /workspace
 RUN ln -s /workspace /home/$UNAME
 USER $UNAME
 
-WORKDIR /home/$UNAME/finn
+WORKDIR /home/$UNAME/sandbox
 
 CMD ["bash"]
