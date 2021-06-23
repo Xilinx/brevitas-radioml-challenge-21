@@ -40,8 +40,7 @@ RUN pip install pandas==1.1.5
 RUN pip install scikit-learn==0.24.1
 RUN pip install tqdm==4.61.1
 RUN pip install dill==0.3.3
-RUN pip install -e git+https://github.com/fbcotter/dataset_loading.git@0.0.4#egg=dataset_loading
-RUN pip install brevitas==0.5.1
+RUN pip install brevitas==0.6.0
 RUN pip install onnxoptimizer==0.2.6
 RUN pip install git+https://github.com/Xilinx/finn-base.git@feature/itu_competition_21#egg=finn-base[onnx]
 RUN pip install versioned-hdf5
