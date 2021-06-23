@@ -85,6 +85,9 @@ DOCKER_EXEC+="--hostname $DOCKER_INST_NAME "
 DOCKER_EXEC+="-e SHELL=/bin/bash "
 DOCKER_EXEC+="-v $SCRIPTPATH:/workspace/sandbox "
 
+# Increase shared memory size for multithreaded dataloading
+DOCKER_EXEC+="--shm-size=256m "
+
 gecho "Docker container is named $DOCKER_INST_NAME"
 gecho "Port-forwarding for Jupyter $JUPYTER_PORT:$JUPYTER_PORT"
 gecho "Port-forwarding for Netron $NETRON_PORT:$NETRON_PORT"
