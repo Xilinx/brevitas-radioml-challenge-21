@@ -41,7 +41,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 : ${JUPYTER_PASSWD_HASH=sha1:a8165c509d95:e3d55958f35e77b8565d0c38a7cca31d7a0e2c3b} # "radioml"
 : ${NETRON_PORT=8081}
 : ${LOCALHOST_URL="localhost"}
-: ${DATASET_PATH=""}
+: ${DATASET_DIR=""}
 : ${DOCKER_GPUS=""}
 
 DOCKER_INTERACTIVE=""
@@ -56,7 +56,7 @@ else
   if [ -z "$JUPYTER_PASSWD_HASH" ]; then
     JUPYTER_PASSWD_ARG=""
   else
-    JUPYTER_PASSWD_ARG="--NotebookApp.password='$JUPYTER_PASSWD_HASH'"
+    JUPYTER_PASSWD_ARG="--NotebookApp.password=$JUPYTER_PASSWD_HASH"
   fi
   DOCKER_CMD="jupyter notebook --no-browser --ip=0.0.0.0 --port $JUPYTER_PORT $JUPYTER_PASSWD_ARG notebooks"
   DOCKER_EXTRA+="-e JUPYTER_PORT=$JUPYTER_PORT "
@@ -91,11 +91,11 @@ gecho "Port-forwarding for Netron $NETRON_PORT:$NETRON_PORT"
 gecho "Mounting $SCRIPTPATH at /workspace/sandbox"
 
 # mount dataset
-if [[ "$DATASET_PATH" != "" ]]; then
-  DOCKER_EXEC+="-v $DATASET_PATH:/workspace/dataset "
-  gecho "Mounting $DATASET_PATH at /workspace/dataset"
+if [[ "$DATASET_DIR" != "" ]]; then
+  DOCKER_EXEC+="-v $DATASET_DIR:/workspace/dataset "
+  gecho "Mounting $DATASET_DIR at /workspace/dataset"
 else
-  yecho "Not set: DATASET_PATH to mount"
+  yecho "Not set: DATASET_DIR to mount"
 fi
 
 # expose selected GPUs

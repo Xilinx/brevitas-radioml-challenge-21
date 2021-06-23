@@ -18,7 +18,7 @@ The sandbox was tested on Ubuntu, but the containerized setup should work on mos
 
 1. Clone this repository
 2. Set optional environment variables
-   - `DATASET_PATH`: This directory will be mounted inside the container under "/workspace/dataset", download instructions can be found inside the Jupyter notebook
+   - `DATASET_DIR`: This directory will be mounted inside the container at "/workspace/dataset", download instructions can be found inside the Jupyter notebook
    - `DOCKER_GPUS`: Select GPUs which will be accessible from within the container, for example `all` or `device=0`
    - `JUPYTER_PORT`: Override default port (8888)
    - `NETRON_PORT`: Override default port (8081)
