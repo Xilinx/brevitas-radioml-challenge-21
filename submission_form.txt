@@ -1,0 +1,34 @@
+### INFO ###
+The format for the submission must be a zipfile including:
+ - This filled out form
+ - Full source code for end-to-end reproducibility
+ - Dockerfile-based environment setup
+   (we suggest to base your submission on this sandbox repository)
+ - Exported .onnx model with batch size = 1
+ - Trained .pth checkpoint
+
+### FILL IN ###
+# Overall test accuracy reached:
+-> 
+
+# Inference cost score reached:
+-> 
+
+# Complete output dictionary printed by the inference_cost() function:
+-> 
+
+# Path to .onnx model within this zipfile:
+-> 
+
+# Path to .pth checkpoint within this zipfile:
+-> 
+
+# Link to GitHub repository containing your code 
+# (to be made public after submission deadline):
+-> 
+
+# Instructions for reproduction:
+-> 
+
+# Further comments:
+-> 
