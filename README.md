@@ -1,6 +1,6 @@
-# brevitas-radioml-challenge-21
+# Sandbox: Lightning-Fast Modulation Classification with Hardware-Efficient Neural Networks
 
-This repository provides a docker-based environment to get started with the [Lightning-Fast Modulation Classification with Hardware-Efficient Neural Networks](https://challenge.aiforgood.itu.int/match/matchitem/34) problem statement of the [**ITU AI/ML in 5G Challenge**](https://aiforgood.itu.int/ai-ml-in-5g-challenge/). The sandbox environment includes PyTorch and Brevitas and serves a Jupyter notebook that guides you through definition, training, and evaluation of an exemplary quantized CNN model.
+This repository provides a Docker-based environment to get started with the [Lightning-Fast Modulation Classification with Hardware-Efficient Neural Networks](https://challenge.aiforgood.itu.int/match/matchitem/34) problem statement of the [**ITU AI/ML in 5G Challenge**](https://aiforgood.itu.int/ai-ml-in-5g-challenge/). The sandbox environment includes PyTorch and Brevitas and serves a Jupyter notebook that guides you through definition, training, and evaluation of an exemplary quantized CNN model.
 
 ## Prerequisites
 
@@ -27,4 +27,7 @@ The sandbox was tested on Ubuntu, but the containerized setup should work on mos
 3. Run `./run_docker.sh` inside `sandbox/` to launch the Jupyter notebook server
    - Alternatively for experimenting: Run `./run_docker.sh bash` to launch an interactive shell
 4. Connect to `http://HOSTNAME:JUPYTER_PORT` from a browser and login with password "radioml"
-  
+
+## Getting help
+Connect with the challenge organizers and other participants on [GitHub discussion](https://github.com/Xilinx/brevitas-radioml-challenge-21/discussions). For questions related to quantization-aware training with Brevitas, there is also a separate Gitter channel: [![Gitter](https://badges.gitter.im/xilinx-brevitas/community.svg)](https://gitter.im/xilinx-brevitas/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+ 
