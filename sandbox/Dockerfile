@@ -46,6 +46,7 @@ RUN echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 RUN pip install future==0.18.2
 RUN pip install numpy==1.18.0
 RUN pip install scipy==1.5.2
+RUN pip install ipykernel==5.5.5
 RUN pip install jupyter==1.0.0
 RUN pip install matplotlib==3.3.1 --ignore-installed
 RUN pip install netron>=4.7.9
